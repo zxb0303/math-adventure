@@ -1,20 +1,103 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# 🚀 数学小探险 (Math Adventure)
 
-This contains everything you need to run your app locally.
+**一年级趣味逻辑思维训练可视化平台**
 
-View your app in AI Studio: https://ai.studio/apps/drive/1tUywrN9hWgI2BEjFi_SGOjCkahnOLv8-
+这是一个专为一年级小学生设计的交互式数学应用，旨在通过**动态可视化**和**分步引导**，帮助孩子理解排队问题、日期计算、页数计算等抽象的逻辑思维题目。
 
-## Run Locally
+摒弃枯燥的说教，让孩子在“看一看”、“点一点”中掌握数学公式背后的原理。
 
-**Prerequisites:**  Node.js
+## ✨ 核心功能
 
+*   **可视化解题**：将抽象的数学问题转化为直观的 SVG 动画，例如用小球代表排队的人，用日历代表放假天数。
+*   **循序渐进**：题目不是直接给出答案，而是通过“三步走”引导：
+    1.  **审题**：画出题目描述的场景。
+    2.  **分析**：高亮关键数据（如“第几个”与“有几个”的区别）。
+    3.  **总结**：展示计算过程和最终公式。
+*   **无限题库**：算法实时生成题目，名字、数字随机变化，支持反复练习。
+*   **交互式体验**：配备进度条、动态反馈和鼓励机制，提升学习兴趣。
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 📚 包含的数学题型
+
+本项目目前涵盖了一年级常见的 7 大类逻辑应用题：
+
+1.  **↔️ 之间有几个？**
+    *   场景：排队求中间人数。
+    *   考点：理解“之间”不包括头尾，公式 `大数 - 小数 - 1`。
+2.  **🚶 排队：前后求总数**
+    *   场景：前面有几人，后面有几人。
+    *   考点：自身不包含在前后人数中，公式 `前 + 后 + 1`。
+3.  **🔢 排队：第几求总数 (重叠问题)**
+    *   场景：从前数第几，从后数第几。
+    *   考点：同一个人被数了两次，需要减去重复，公式 `前 + 后 - 1`。
+4.  **➕ 排队：排名 + 数量 (混合)**
+    *   场景：已知排名和另一侧的人数。
+    *   考点：理解“第几”包含自己，“有几个”不包含自己，直接相加。
+5.  **📖 看书页数**
+    *   场景：从第 X 页看到第 Y 页。
+    *   考点：首尾页都包含在内，公式 `末页 - 首页 + 1`。
+6.  **📅 放假天数**
+    *   场景：星期几到星期几。
+    *   考点：日期跨度计算，同样涉及首尾包含原理。
+7.  **⏰ 推迟几天？**
+    *   场景：今天是星期 X，推迟 Y 天是星期几。
+    *   考点：日期的循环周期计算（模运算的可视化）。
+
+## 🛠️ 技术栈
+
+本项目使用现代前端技术栈构建，代码清晰，易于扩展：
+
+*   **框架**: [React 19](https://react.dev/)
+*   **构建工具**: [Vite](https://vitejs.dev/)
+*   **语言**: [TypeScript](https://www.typescriptlang.org/)
+*   **样式**: [Tailwind CSS](https://tailwindcss.com/)
+*   **图形**: 原生 SVG (用于绘制轻量级、高性能的解题动画)
+
+## 💻 本地运行
+
+1.  **克隆项目**
+    ```bash
+    git clone https://github.com/your-username/math-adventure.git
+    cd math-adventure
+    ```
+
+2.  **安装依赖**
+    ```bash
+    npm install
+    # 或者
+    yarn install
+    ```
+
+3.  **启动开发服务器**
+    ```bash
+    npm run dev
+    ```
+    打开浏览器访问 `http://localhost:3000` 即可看到效果。
+
+4.  **构建生产版本**
+    ```bash
+    npm run build
+    ```
+
+## 📂 目录结构
+
+```
+src/
+├── components/      # UI 组件 (ProblemSolver, Visualizer)
+├── features/        # 各个题型的生成逻辑与可视化组件 (核心逻辑)
+│   ├── Between.tsx
+│   ├── QueueFB.tsx
+│   ├── ...
+├── utils/           # 工具函数 (生成器入口, 辅助函数)
+├── types.ts         # TypeScript 类型定义
+├── App.tsx          # 主入口
+└── index.tsx
+```
+
+## 🤝 贡献
+
+欢迎提交 Issue 或 Pull Request 来增加新的题型或改进动画效果！让数学变得更有趣！
+
+## 📄 License
+
+MIT License
