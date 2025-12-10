@@ -96,13 +96,11 @@ export const ProblemSolver: React.FC<ProblemSolverProps> = ({ type, title, icon,
                         )}
                     </div>
 
-                    {/* Result Reveal - Moved here so it doesn't push the buttons when they are justified to bottom */}
-                    {/* We keep the container present but invisible to reserve some space or just animate it in. */}
-                    {/* Actually, justify-between pushes sections apart. If we insert this in the top flow, it pushes down into the empty space. */}
-                    <div className={`transition-all duration-700 transform ease-out ${isFinished ? 'opacity-100 translate-y-0 max-h-40' : 'opacity-0 translate-y-4 max-h-0 overflow-hidden'}`}>
-                        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-2xl p-4 text-center">
-                             <div className="text-sm font-bold text-yellow-600 uppercase mb-1">最终答案</div>
-                             <div className="text-3xl font-black text-yellow-800">{data.answerText}</div>
+                    {/* Result Reveal - Compact version to prevent layout shifts */}
+                    <div className={`transition-all duration-700 transform ease-out ${isFinished ? 'opacity-100 translate-y-0 max-h-24' : 'opacity-0 translate-y-4 max-h-0 overflow-hidden'}`}>
+                        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 rounded-xl p-3 text-center shadow-sm">
+                             <div className="text-xs font-bold text-yellow-600 uppercase mb-0.5">最终答案</div>
+                             <div className="text-2xl font-black text-yellow-800 leading-tight">{data.answerText}</div>
                         </div>
                     </div>
                 </div>
