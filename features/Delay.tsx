@@ -42,7 +42,7 @@ export const DelayVisualizer: React.FC<{ data: ProblemData; step: number }> = ({
   };
 
   return (
-      <svg viewBox="0 0 400 350" className="w-full h-full">
+      <svg viewBox="0 0 400 350" className="w-full h-full max-h-[400px]">
           {/* Background Ring */}
           <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="#f1f5f9" strokeWidth="8" />
 
@@ -74,7 +74,13 @@ export const DelayVisualizer: React.FC<{ data: ProblemData; step: number }> = ({
               }
 
               return (
-                  <g key={i} className="transition-all duration-500" style={{ transformBox: 'fill-box', transformOrigin: 'center', transform: `scale(${scale})` }}>
+                  <g key={i} className="transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" 
+                     style={{ 
+                         transformBox: 'fill-box', 
+                         transformOrigin: 'center', 
+                         transform: `scale(${scale})`,
+                         transitionDelay: `${i * 50}ms`
+                     }}>
                       <circle cx={x} cy={y} r={28} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
                       <text x={x} y={y + 5} textAnchor="middle" fill={labelColor} fontSize="16" fontWeight="bold">{day}</text>
                       
@@ -105,7 +111,7 @@ export const DelayVisualizer: React.FC<{ data: ProblemData; step: number }> = ({
                            strokeWidth="3" 
                            strokeDasharray="6,4" 
                            markerEnd="url(#arrowhead-blue-curve)"
-                           className="transition-all duration-1000"
+                           className="transition-all duration-1000 delay-500"
                        />
                        <text x={centerX} y={centerY} textAnchor="middle" fill={COLORS.primary} fontSize="28" fontWeight="bold">
                            +{delay}天

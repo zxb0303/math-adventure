@@ -31,7 +31,7 @@ export const BookVisualizer: React.FC<{ data: ProblemData; step: number }> = ({ 
   const items = Array.from({ length: span + 5 }, (_, i) => start - 2 + i).filter(n => n > 0);
   
   return (
-    <svg viewBox={`0 0 ${items.length * 60 + 20} 150`} className="w-full h-full max-h-[300px]">
+    <svg viewBox={`0 0 ${items.length * 60 + 20} 150`} className="w-full h-full max-h-[400px]">
        {step >= 1 && items.map((num, i) => {
            const x = 40 + i * 60;
            const isStart = num === start;
@@ -49,7 +49,8 @@ export const BookVisualizer: React.FC<{ data: ProblemData; step: number }> = ({ 
            if (step >= 3 && isInRange) { fill = '#dcfce7'; stroke = COLORS.success; } // Result
 
            return (
-               <g key={num} className="transition-all duration-500">
+               <g key={num} className="transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+                  style={{ transitionDelay: `${i * 50}ms` }}>
                   <rect x={x - 25} y={40} width={50} height={60} rx={4} fill={fill} stroke={stroke} strokeWidth={strokeWidth} 
                         style={{ transition: 'fill 0.5s, stroke 0.5s' }}/>
                   {/* Page Lines decoration */}

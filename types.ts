@@ -1,7 +1,9 @@
+
 export enum ProblemType {
   BETWEEN = 'BETWEEN',
   QUEUE_FB = 'QUEUE_FB',
   QUEUE_RANK = 'QUEUE_RANK',
+  QUEUE_MIXED = 'QUEUE_MIXED',
   BOOK = 'BOOK',
   HOLIDAY = 'HOLIDAY',
   DELAY = 'DELAY'

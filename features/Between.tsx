@@ -33,7 +33,7 @@ export const BetweenVisualizer: React.FC<{ data: ProblemData; step: number }> = 
   const items = Array.from({ length: totalItems }, (_, i) => i + 1);
 
   return (
-    <svg viewBox={`0 0 ${items.length * 50 + 20} 150`} className="w-full h-full max-h-[300px]">
+    <svg viewBox={`0 0 ${items.length * 50 + 20} 150`} className="w-full h-full max-h-[400px]">
       {step >= 1 && items.map((num, i) => {
         const x = 30 + i * 50;
         const isA = num === a;
@@ -52,12 +52,13 @@ export const BetweenVisualizer: React.FC<{ data: ProblemData; step: number }> = 
         }
 
         return (
-          <g key={num} className="transition-all duration-700 ease-out" 
+          <g key={num} className="transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)]" 
              style={{ 
                transformBox: 'fill-box', 
                transformOrigin: 'center', 
                transform: `scale(${scale})`,
-               opacity: 1 
+               opacity: 1,
+               transitionDelay: `${i * 60}ms`
              }}>
              {/* Line connector */}
              {i > 0 && <line x1={x - 40} y1={75} x2={x - 10} y2={75} stroke="#cbd5e1" strokeWidth="2" />}
@@ -87,9 +88,9 @@ export const BetweenVisualizer: React.FC<{ data: ProblemData; step: number }> = 
         d={`M ${30 + a * 50} 110 Q ${30 + ((a+b)/2 -1) * 50} 150 ${30 + (b-2) * 50} 110`} 
         fill="none" 
         stroke={COLORS.highlight} 
-        strokeWidth="2" 
-        strokeDasharray="5,5"
-        className={`transition-all duration-1000 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}
+        strokeWidth="3" 
+        strokeDasharray="8,8"
+        className={`transition-all duration-1000 delay-500 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}
         style={{ strokeDashoffset: step >= 3 ? 0 : 100 }}
       />
     </svg>

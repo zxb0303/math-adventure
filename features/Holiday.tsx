@@ -31,7 +31,7 @@ export const HolidayVisualizer: React.FC<{ data: ProblemData; step: number }> = 
   const items = [1, 2, 3, 4, 5, 6, 7]; 
   
   return (
-    <svg viewBox="0 0 450 150" className="w-full h-full max-h-[300px]">
+    <svg viewBox="0 0 450 150" className="w-full h-full max-h-[400px]">
        {step >= 1 && items.map((num, i) => {
            const x = 35 + i * 60;
            const isStart = num === startIdx1;
@@ -48,7 +48,7 @@ export const HolidayVisualizer: React.FC<{ data: ProblemData; step: number }> = 
            if (step >= 3 && isInRange) { fill = '#dcfce7'; stroke = COLORS.success; }
 
            return (
-               <g key={num} className="transition-all duration-500">
+               <g key={num} className="transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]" style={{ transitionDelay: `${i * 50}ms` }}>
                   {/* Calendar Paper Look */}
                   <rect x={x - 25} y={40} width={50} height={50} rx={8} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />
                   {/* Top Bar of calendar */}

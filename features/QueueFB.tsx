@@ -35,23 +35,33 @@ export const QueueFBVisualizer: React.FC<{ data: ProblemData; step: number }> = 
   for(let i=0; i<back; i++) items.push({ type: 'back', id: `b${i}` });
 
   return (
-    <svg viewBox={`0 0 ${items.length * 45 + 50} 150`} className="w-full h-full max-h-[300px]">
+    <svg viewBox={`0 0 ${items.length * 45 + 50} 150`} className="w-full h-full max-h-[400px]">
       {items.map((item, i) => {
         const x = 40 + i * 45;
         let opacity = 0;
         let color = COLORS.pale;
         let label = '';
         let transformY = 0;
+        let delay = 0;
+
+        // Progressive delays based on index
+        delay = i * 50; 
 
         if (step >= 1 && item.type === 'me') { opacity = 1; color = COLORS.highlight; label = "我"; }
         if (step >= 2 && item.type === 'front') { opacity = 1; color = COLORS.primary; }
         if (step >= 3 && item.type === 'back') { opacity = 1; color = COLORS.secondary; }
 
         // Animation effect: items slide in slightly from top
-        if (opacity === 0) transformY = -20;
+        if (opacity === 0) transformY = -30;
 
         return (
-          <g key={item.id} style={{ opacity, transform: `translateY(${transformY}px)` }} className="transition-all duration-500 ease-out">
+          <g key={item.id} 
+             style={{ 
+                 opacity, 
+                 transform: `translateY(${transformY}px)`,
+                 transitionDelay: `${delay}ms` 
+             }} 
+             className="transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
              <rect x={x - 15} y={50} width={30} height={50} rx={8} fill={color} />
              <circle cx={x} cy={40} r={12} fill={color} />
              {label && <text x={x} y={20} textAnchor="middle" fill={COLORS.highlight} fontSize="14" fontWeight="bold">{label}</text>}
@@ -61,13 +71,13 @@ export const QueueFBVisualizer: React.FC<{ data: ProblemData; step: number }> = 
       })}
       
       {/* Bracket for Front */}
-      <g className={`transition-opacity duration-700 ${step >= 2 ? 'opacity-100' : 'opacity-0'}`}>
+      <g className={`transition-opacity duration-700 delay-500 ${step >= 2 ? 'opacity-100' : 'opacity-0'}`}>
           <path d={`M 25 30 L 25 20 L ${25 + front * 45} 20 L ${25 + front * 45} 30`} fill="none" stroke={COLORS.primary} strokeWidth="2" />
           <text x={25 + (front * 45) / 2} y={15} textAnchor="middle" fill={COLORS.primary} fontSize="12">{front} 人</text>
       </g>
       
       {/* Bracket for Back */}
-      <g className={`transition-opacity duration-700 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}>
+      <g className={`transition-opacity duration-700 delay-500 ${step >= 3 ? 'opacity-100' : 'opacity-0'}`}>
           <path d={`M ${25 + (front + 1) * 45} 30 L ${25 + (front + 1) * 45} 20 L ${25 + (total) * 45} 20 L ${25 + (total) * 45} 30`} fill="none" stroke={COLORS.secondary} strokeWidth="2" />
           <text x={25 + (front + 1) * 45 + (back * 45) / 2} y={15} textAnchor="middle" fill={COLORS.secondary} fontSize="12">{back} 人</text>
       </g>
